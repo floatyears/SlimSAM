@@ -1,3 +1,4 @@
+import datetime
 import numpy as np
 from torch.utils.data import DataLoader
 from torch.optim import Adam
@@ -150,6 +151,7 @@ def train_model():
         grad_iter = iter(grad_loader)
 
         for i in range(len(grad_iter)):
+            print("importance estimation batch: ", i, datetime.datetime.now())
 
             batch = next(grad_iter)
             input_image = batch["input_image"].to(device)
@@ -200,6 +202,7 @@ def train_model():
 
             for i in range(len(train_iter)):
 
+                print(f"Bottleneck Aligning epoch {epoch} batch {i}, time: {datetime.datetime.now()}")
                 batch = next(train_iter)
                 input_image = batch["input_image"].to(device)
 

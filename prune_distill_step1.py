@@ -1,3 +1,4 @@
+import datetime
 import numpy as np
 from torch.utils.data import DataLoader
 from torch.optim import Adam
@@ -66,12 +67,14 @@ def train_model():
 
     # student model
     model_type = 'vit_b'
-    checkpoint = 'checkpoints/sam_vit_b_qkv.pth'
+    # checkpoint = 'checkpoints/sam_vit_b_qkv.pth'
+    checkpoint = 'E:/Projects/AutoPsdToScripts/models/sam_vit_b_01ec64.pth'
     model = sam_model_registry[model_type](checkpoint=checkpoint)
 
     # teacher model
     teacher_model_type = 'vit_b'
-    checkpoint = 'checkpoints/sam_vit_b_qkv.pth'
+    # checkpoint = 'checkpoints/sam_vit_b_qkv.pth'
+    checkpoint = 'E:/Projects/AutoPsdToScripts/models/sam_vit_b_01ec64.pth'
     teacher_model = sam_model_registry[teacher_model_type](checkpoint=checkpoint)
     teacher_model.to(device)
     teacher_model.eval()
@@ -114,7 +117,7 @@ def train_model():
         grad_iter = iter(grad_loader)
 
         for i in range(len(grad_iter)):
-
+            print(f"importance estimation batch {i} total {len(grad_iter)}, time: {datetime.datetime.now()}")
             batch = next(grad_iter)
             input_image = batch["input_image"].to(device)
 
@@ -152,7 +155,7 @@ def train_model():
             train_iter = iter(train_loader)
 
             for i in range(len(train_iter)):
-
+                print(f"Bottleneck Aligning epoch {epoch} batch {i} total {len(train_iter)}, time: {datetime.datetime.now()}")
                 batch = next(train_iter)
                 input_image = batch["input_image"].to(device)
 
@@ -256,40 +259,6 @@ def train_model():
                     scheduler.step(iou)
                     print("epoch:",epoch)
                     print("IOU: {} Best IOU {}".format(iou,best_iou))
-
-        
-        
-
-
-
-
-        
-
-
-        
-
-
-    
-
-
-
-
-
-
-           
-
-
-            
-
-
-
-
-
-
-
-
-
-
 
 if __name__ == '__main__':
     train_model()

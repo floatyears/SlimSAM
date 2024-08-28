@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Train Step 1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "prune_distill_step1.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--traindata_path",
+                "H:/DeepLearning/Datasets/SAM-1B/An_m2SWozW4o/Images", 
+                "--valdata_path",
+                "H:/DeepLearning/Datasets/SAM-1B/An_m2SWozW4o/ValidationSets", 
+                "--prune_ratio",
+                "50",
+                "--epochs",
+                "40"
+            ]
+        },
+        {
+            "name": "Train Step 2",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "prune_distill_step2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--traindata_path",
+                "H:/DeepLearning/Datasets/SAM-1B/An_m2SWozW4o/Images", 
+                "--valdata_path",
+                "H:/DeepLearning/Datasets/SAM-1B/An_m2SWozW4o/ValidationSets", 
+                "--prune_ratio",
+                "50",
+                "--epochs",
+                "40"
+            ]
+        }
+    ]
+}
